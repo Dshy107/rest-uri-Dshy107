@@ -23,6 +23,8 @@ namespace WcfRESTserviceStudent
         // https://stackoverflow.com/questions/21623432/how-to-pass-multiple-parameter-in-wcf-restful-service
         List<Teacher> GetAllTeachers(string nameFragment = null, string sort = null);
 
+
+
         // Not legal: endpoints are consideres equal when they only differ by ?name=val
         //[OperationContract]
         //[WebInvoke(Method = "GET", ResponseFormat = WebMessageFormat.Json,
@@ -85,5 +87,44 @@ namespace WcfRESTserviceStudent
             BodyStyle = WebMessageBodyStyle.Bare,
             UriTemplate = "teachers/{id}")]
         Teacher UpdateTeacher(string id, Teacher teacher);
+
+        //Students
+        [OperationContract]
+        [WebInvoke(Method = "GET", RequestFormat = WebMessageFormat.Json, UriTemplate = "students?name={namefragment}&sort={sort}")]
+        List<Student> GetAllStudents(string nameFragment = null, string sort = null);
+
+        [OperationContract]
+        [WebInvoke(Method = "GET", RequestFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.Bare, UriTemplate = "students/{id}")]
+        Student GetStudentByid(string id);
+
+        [OperationContract]
+        [WebInvoke(Method = "GET", RequestFormat = WebMessageFormat.Json, UriTemplate = "students/{id}/name")]
+        Student GetStudentNameById(string id);
+
+        [OperationContract]
+        [WebInvoke(Method = "POST",
+            RequestFormat = WebMessageFormat.Json,
+            ResponseFormat = WebMessageFormat.Json,
+            BodyStyle = WebMessageBodyStyle.Bare,
+            UriTemplate = "students/{id}")]
+        Student AddStudent(Student student);
+
+        [OperationContract]
+        [WebInvoke(Method = "PUT",
+            RequestFormat = WebMessageFormat.Json,
+            ResponseFormat = WebMessageFormat.Json,
+            BodyStyle = WebMessageBodyStyle.Bare,
+            UriTemplate = "students/{id}")]
+        Student UpdateStudent(string id, Student student);
+
+        [OperationContract]
+        [WebInvoke(Method = "DELETE",
+            RequestFormat = WebMessageFormat.Json,
+            UriTemplate = "students/{id}")]
+        Student DeleteStudent(string id);
+
+        [OperationContract]
+        [WebInvoke(Method = "GET", RequestFormat = WebMessageFormat.Json, UriTemplate = "teatchers/{id}/students")]
+        Student GetTeacherIdByStudents(string id);
     }
 }

@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Web.UI;
 using Education;
@@ -115,6 +116,41 @@ namespace WcfRESTserviceStudent
             if (teacher.MobileNo != 0) existingTeacher.MobileNo = teacher.MobileNo;
             if (teacher.Salary != null) existingTeacher.Salary = teacher.Salary;
             return existingTeacher;
+        }
+
+        public List<Student> GetAllStudents(string nameFragment = null, string sort = null)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Student GetStudentByid(string id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Student GetStudentNameById(string id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Student AddStudent(Student student)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Student UpdateStudent(string id, Student student)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Student DeleteStudent(string id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Student GetTeacherIdByStudents(string id)
+        {
+            throw new NotImplementedException();
         }
     }
 }
