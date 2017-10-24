@@ -120,12 +120,38 @@ namespace WcfRESTserviceStudent
 
         public List<Student> GetAllStudents(string nameFragment = null, string sort = null)
         {
-            throw new NotImplementedException();
+            List<Student> data = SchoolData.Students;
+            if (nameFragment != null)
+            {
+                data = data.FindAll(student => student.Name.Contains(nameFragment));
+
+            }
+            if (sort == null) return data;
+            sort = sort.ToLower();
+            switch (sort)
+            {
+                case "name":
+                    data.Sort((student, studnet1) => student.Name.CompareTo(studnet1.Name));
+                    return data;
+                case "id":
+                    data.Sort((student, student1) => student.Id - student1.Id);
+                    return data;
+                case "mobileno":
+                    data.Sort((student, student1) => student.MobileNo - student1.MobileNo);
+                    return data;
+                case "schoolclassid":
+                    data.Sort((student, student1) => student.SchoolClassId.CompareTo(student1.SchoolClassId));
+                    return data;
+                default: return data;
+                
+
+            }
         }
 
         public Student GetStudentByid(string id)
         {
-            throw new NotImplementedException();
+            int idInt = int.Parse(id);
+            return SchoolData.Students.FirstOrDefault(student => student.Id == idInt);
         }
 
         public Student GetStudentNameById(string id)
@@ -135,12 +161,19 @@ namespace WcfRESTserviceStudent
 
         public Student AddStudent(Student student)
         {
-            throw new NotImplementedException();
+            SchoolData.Students.Add(student);
+            return student;
         }
 
         public Student UpdateStudent(string id, Student student)
         {
-            throw new NotImplementedException();
+            int idInt = int.Parse(id);
+            Student existingStudent = SchoolData.Students.FirstOrDefault(st => st.Id == idInt);
+            if (existingStudent == null) return null;
+            if (student.Name != null) existingStudent.Name = student.Name;
+            if (student.MobileNo != 0) existingStudent.MobileNo = student.MobileNo;
+            if (student.SchoolClassId != null) existingStudent.SchoolClassId = student.SchoolClassId;
+            return existingStudent;
         }
 
         public Student DeleteStudent(string id)
